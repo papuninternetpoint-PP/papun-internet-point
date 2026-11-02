@@ -1,0 +1,5 @@
+const WA_NUMBER='919439XXXXXX'; // Change to your WhatsApp number with country code, digits only.
+['waTop','waSide','waFloat'].forEach(id=>{const a=document.getElementById(id);if(a)a.href='https://wa.me/'+WA_NUMBER.replace(/\\D/g,'');});
+document.querySelector('.menubtn').addEventListener('click',()=>document.querySelector('.navlinks').classList.toggle('open'));
+document.querySelectorAll('.navlinks a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.navlinks').classList.remove('open')));
+document.getElementById('searchForm').addEventListener('submit',e=>{e.preventDefault();const q=document.getElementById('q').value.toLowerCase().trim();let n=0;document.querySelectorAll('.card').forEach(c=>{const ok=!q||(c.innerText+' '+c.dataset.k).toLowerCase().includes(q);c.style.display=ok?'flex':'none';if(ok)n++;});document.querySelector('.quick').style.display=q?'none':'';let msg=document.getElementById('noMatch');if(!msg){msg=document.createElement('p');msg.id='noMatch';msg.style.textAlign='center';document.querySelector('.cards').after(msg);}msg.textContent=n?'': 'No matching service found. Please contact us.';});
