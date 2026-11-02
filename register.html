@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Registration - PAPUN INTERNET POINT</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eef3f9;
+}
+.header {
+    background: #0756a5;
+    color: white;
+    text-align: center;
+    padding: 22px 10px;
+}
+.header h2 {
+    margin: 0;
+}
+.container {
+    max-width: 430px;
+    background: white;
+    margin: 35px auto;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px #ccc;
+}
+h3 {
+    text-align: center;
+    color: #0756a5;
+}
+input {
+    width: 100%;
+    padding: 13px;
+    margin: 9px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+}
+button {
+    width: 100%;
+    padding: 13px;
+    background: #0756a5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 17px;
+    cursor: pointer;
+}
+.login {
+    text-align: center;
+    margin-top: 18px;
+}
+.login a {
+    color: #0756a5;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h2>PAPUN INTERNET POINT</h2>
+    <p>Customer Registration</p>
+</div>
+
+<div class="container">
+
+<h3>Create Your Account</h3>
+
+<form id="registerForm">
+
+<input type="text" placeholder="Full Name" required>
+
+<input type="tel" placeholder="Mobile Number"
+pattern="[0-9]{10}" maxlength="10" required>
+
+<input type="email" placeholder="Email ID" required>
+
+<input type="password" placeholder="Create Password"
+minlength="8" required>
+
+<input type="password" placeholder="Confirm Password"
+minlength="8" required>
+
+<button type="submit">Register Now</button>
+
+</form>
+
+<div class="login">
+Already have an account?
+<a href="login.html">Login</a>
+</div>
+
+</div>
+
+</body>
+</html>
