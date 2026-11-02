@@ -2,103 +2,86 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Customer Registration - PAPUN INTERNET POINT</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Register - PAPUN INTERNET POINT</title>
 <style>
-* {
-    box-sizing: border-box;
-}
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #eef3f9;
-}
-.header {
-    background: #0756a5;
-    color: white;
-    text-align: center;
-    padding: 22px 10px;
-}
-.header h2 {
-    margin: 0;
-}
-.container {
-    max-width: 430px;
-    background: white;
-    margin: 35px auto;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 3px 15px #ccc;
-}
-h3 {
-    text-align: center;
-    color: #0756a5;
-}
-input {
-    width: 100%;
-    padding: 13px;
-    margin: 9px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 15px;
-}
-button {
-    width: 100%;
-    padding: 13px;
-    background: #0756a5;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 17px;
-    cursor: pointer;
-}
-.login {
-    text-align: center;
-    margin-top: 18px;
-}
-.login a {
-    color: #0756a5;
-}
+body{font-family:Arial;background:#eef3f9;margin:0}
+header{background:#0756a5;color:white;text-align:center;padding:20px}
+.box{max-width:400px;background:white;margin:35px auto;padding:25px;border-radius:10px}
+input,button{width:100%;padding:13px;margin:10px 0;box-sizing:border-box}
+button{background:#0756a5;color:white;border:0}
+#message{color:#0756a5;text-align:center}
 </style>
 </head>
-
 <body>
 
-<div class="header">
-    <h2>PAPUN INTERNET POINT</h2>
-    <p>Customer Registration</p>
-</div>
+<header>
+<h2>PAPUN INTERNET POINT</h2>
+<p>Customer Registration</p>
+</header>
 
-<div class="container">
-
-<h3>Create Your Account</h3>
+<div class="box">
+<h3>Create Account</h3>
 
 <form id="registerForm">
-
-<input type="text" placeholder="Full Name" required>
-
-<input type="tel" placeholder="Mobile Number"
+<input id="name" placeholder="Full Name" required>
+<input id="mobile" type="tel" placeholder="Mobile Number"
 pattern="[0-9]{10}" maxlength="10" required>
-
-<input type="email" placeholder="Email ID" required>
-
-<input type="password" placeholder="Create Password"
-minlength="8" required>
-
-<input type="password" placeholder="Confirm Password"
-minlength="8" required>
-
+<input id="email" type="email" placeholder="Email ID" required>
+<input id="password" type="password"
+placeholder="Create Password" minlength="8" required>
+<input id="confirm" type="password"
+placeholder="Confirm Password" minlength="8" required>
 <button type="submit">Register Now</button>
-
 </form>
 
-<div class="login">
-Already have an account?
-<a href="login.html">Login</a>
+<p id="message"></p>
+<p>Already Registered? <a href="login.html">Login</a></p>
 </div>
 
-</div>
+<script type="module">
+import { supabase } from './supabase.js';
+
+const form = document.getElementById('registerForm');
+const message = document.getElementById('message');
+
+form.addEventListener('submit', async (e) => {
+ e.preventDefault();
+
+ const name = document.getElementById('name').value.trim();
+ const mobile = document.getElementById('mobile').value.trim();
+ const email = document.getElementById('email').value.trim();
+ const password = document.getElementById('password').value;
+ const confirm = document.getElementById('confirm').value;
+
+ if(password !== confirm){
+   message.textContent = 'Password does not match';
+   return;
+ }
+
+ message.textContent = 'Please wait...';
+
+ const {data, error} = await supabase.auth.signUp({
+   email: email,
+   password: password,
+   options: {
+     data: {
+       full_name: name,
+       mobile: mobile
+     }
+   }
+ });
+
+ if(error){
+   message.textContent = error.message;
+   return;
+ }
+
+ message.textContent =
+ 'Registration successful! Check your email for verification.';
+ form.reset();
+});
+</script>
 
 </body>
 </html>
